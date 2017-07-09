@@ -40,7 +40,11 @@ public class User {
   }
 
   public void setEmail(String email) {
-    this.email = email == null ? null : email.toLowerCase();
+    if (email == null) {
+      throw new IllegalArgumentException("email needs to be given");
+    }
+
+    this.email = email.toLowerCase();
   }
 
   public String getPasswordEncrypted() {
@@ -72,6 +76,7 @@ public class User {
   }
 
   @Override
+  @SuppressWarnings("squid:S2068")
   public String toString() {
     return new ToStringCreator(this) //
         .append("id", id) //
